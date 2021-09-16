@@ -90,23 +90,7 @@ public abstract class Employee implements Serializable{
     }
 
     @Override
-    public String toString(){
-        String data = "\n{\n\tUser ID: " + getId();
-        data += "\n\tName: " + getName();
-        data += "\n\tAddress: " + getAddress();
-        data += "\n\tSalary: " + getSalary();
-        data += "\n\tService Tax: " + getServiceTax();
-        data += "\n\tPayment Data: {" + getPaymentData();
-
-        if(this.employeeSyndicate.getIsAffiliated()){
-            data += "\n\tSyndicate: { ";
-            data += this.employeeSyndicate.toString();
-            data += "\n\t}";
-        }
-
-        data += "\n}\n";
-        return data;
-    }
+    public abstract String toString();
 
     public abstract PayCheck makePayment(LocalDate date);
 
@@ -132,5 +116,16 @@ public abstract class Employee implements Serializable{
 
         taxes += this.getEmployeeSyndicate().getTax();
         return taxes;
+    }
+
+    protected String printSyndicate(){
+        String data = "";
+        if(this.getEmployeeSyndicate() != null && this.getEmployeeSyndicate().getIsAffiliated() == true){
+            data += "\n\tSyndicate: {";
+            data += this.getEmployeeSyndicate().toString();
+            data += "\n\t}";
+        }
+
+        return data;
     }
 }

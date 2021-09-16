@@ -78,13 +78,7 @@ public class Comissioned extends Employee{
         data += "\n\tComission: " + getComission();
         data += "\n\tSales: " + getSales();
         data += "\n\tPayment Data: {" + getPaymentData();
-
-        if(this.getEmployeeSyndicate().getIsAffiliated()){
-            data += "\n\tSyndicate: {";          
-            data += this.getEmployeeSyndicate().toString();
-            data += "\n\t}";
-        }
-
+        data += printSyndicate();
         data += "\n}";
         return data;
     }

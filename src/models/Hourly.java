@@ -93,13 +93,7 @@ public class Hourly extends Employee{
         data += "\n\tSalary: " + getSalary();
         data += "\n\tTime Cards: " + getTimeCards();
         data += "\n\tPayment Data: {" + getPaymentData();
-
-        if(this.getEmployeeSyndicate().getIsAffiliated()){
-            data += "\n\tSyndicate: {";
-            data += this.getEmployeeSyndicate().toString();
-            data += "\n\t}";
-        }
-
+        data += printSyndicate();
         data += "\n}";
         return data;
     }
