@@ -1,7 +1,7 @@
 package models;
 
 import java.util.UUID;
-import java.io.Serializable; //  undo;redo
+import java.io.Serializable;
 
 public class Syndicate implements Serializable{
     private UUID id;

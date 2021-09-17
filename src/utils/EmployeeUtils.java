@@ -218,7 +218,7 @@ public class EmployeeUtils{
                     return new PaymentSchedule(null, DayOfWeek.FRIDAY, "Weekly", new WeeklyStrategy());
                 }
                 else{
-                    return new PaymentSchedule(null, DayOfWeek.FRIDAY, "Weekly", new WeeklyStrategy());
+                    return new PaymentSchedule(null, weekDay, "Weekly", new WeeklyStrategy());
                 }
             case 3:
                 System.out.println("Enter the day of the week, which:");

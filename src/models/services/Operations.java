@@ -1,10 +1,9 @@
-// this part of the code is a way to avoid bad smell
 package models.services;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Operations implements Serializable{
+public abstract class Operations implements Serializable{
     private Double value;
     private LocalDate date;
 

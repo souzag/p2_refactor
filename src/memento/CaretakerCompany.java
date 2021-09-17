@@ -20,7 +20,7 @@ public class CaretakerCompany{
     }
 
     public Company undo(){
-        if (this.history.isEmpty()) {
+        if (this.history.isEmpty()){
             System.out.println("Error: History's empty.");
         }
         else{

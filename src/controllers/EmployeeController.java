@@ -1,15 +1,11 @@
 package controllers;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import models.*;
-import models.services.*;
 import utils.EmployeeUtils;
-import utils.GeneralUtils;
 import utils.ValueHolder;
 
 public class EmployeeController{
@@ -41,8 +37,7 @@ public class EmployeeController{
     }
 
     public static void registerNewEmployee(Scanner input, ArrayList<Employee> employees){
-        Employee employee = null;
-        employee = EmployeeUtils.readEmployeeBasicData(input).getEmployee();
+        Employee employee = EmployeeUtils.readEmployeeBasicData(input).getEmployee();
 
         if(employee == null){
             System.out.println("\nError: Employee not registered.\n");
@@ -52,83 +47,6 @@ public class EmployeeController{
         employees.add(employee);
         System.out.println(employee);
         System.out.println("\nEmployee registered successfully.\n");
-    }
-
-    public static void launchTimeCard(Scanner input, ArrayList<Employee> employees){
-        Employee employee = null;
-        employee = EmployeeUtils.findEmployee(input, employees);
-
-        if(!EmployeeUtils.wasEmployeeFound(employee)) return;
-
-        Hourly hourlyEmployee = (Hourly) employee;
-
-        System.out.print("Enter the entry hour (HH): ");
-        int entryHour = input.nextInt();
-
-        System.out.print("Enter the out hour (HH): ");
-        int outHour = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Enter the date (YYYY-MM-DD): ");
-        String date = input.nextLine();
-
-        ArrayList<Integer> dateData = GeneralUtils.convertDateToArray(date);
-
-        LocalTime employeeEntry = LocalTime.of(entryHour, 00, 00);
-        LocalTime employeeOut = LocalTime.of(outHour, 00, 00);
-
-        LocalDate employeeDate = LocalDate.of(dateData.get(0), dateData.get(1), dateData.get(2));
-        TimeCard timeCard = new TimeCard(employeeDate, employeeEntry, employeeOut);
-        ArrayList<TimeCard> newTimeCards = hourlyEmployee.getTimeCards();
-
-        newTimeCards.add(timeCard);
-        hourlyEmployee.setTimeCards(newTimeCards);
-    }
-
-    public static void launchSaleResult(Scanner input, ArrayList<Employee> employees){
-        Employee employee = null;
-        employee = EmployeeUtils.findEmployee(input, employees);
-
-        if(!EmployeeUtils.wasEmployeeFound(employee)) return;
-
-        Comissioned comissionedEmployee = (Comissioned) employee;
-
-        System.out.print("Enter the value of the sale: ");
-        Double value = input.nextDouble();
-        input.nextLine();
-
-        System.out.print("Enter the date (YYYY-MM-DD): ");
-        String date = input.nextLine();
-
-        ArrayList<Integer> dateData = GeneralUtils.convertDateToArray(date);
-        LocalDate saleDate = LocalDate.of(dateData.get(0), dateData.get(1), dateData.get(2));
-        SaleResult newSale = new SaleResult(value, saleDate);
-        ArrayList<SaleResult> sales = comissionedEmployee.getSales();
-
-        sales.add(newSale);
-        comissionedEmployee.setSales(sales);
-    }
-
-    public static void launchServiceTax(Scanner input, ArrayList<Employee> employees){
-        Employee updateEmployee = null;
-        updateEmployee = EmployeeUtils.findEmployee(input, employees);
-
-        if(updateEmployee == null) return;
-
-        System.out.print("Enter the value of the service tax: ");
-        Double value = input.nextDouble();
-        input.nextLine();
-
-        System.out.print("Enter the date (YYYY-MM-DD): ");
-        String date = input.nextLine();
-
-        ArrayList<Integer> dateData = GeneralUtils.convertDateToArray(date);
-        LocalDate serviceTaxDate = LocalDate.of(dateData.get(0), dateData.get(1), dateData.get(2));
-        ServiceTax serviceTax = new ServiceTax(value, serviceTaxDate);
-        ArrayList<ServiceTax> serviceTaxList = updateEmployee.getServiceTax();
-
-        serviceTaxList.add(serviceTax);
-        System.out.println("\nService tax registered successfully.\n");
     }
 
     public static void updateEmployee(Scanner input, ArrayList<Employee> employees){
