@@ -11,10 +11,6 @@ public class PaymentData implements Serializable{
     private PaymentSchedule paymentSchedule;
     private ArrayList<PayCheck> payChecks;
 
-    public PaymentData(){
-
-    }
-
     public PaymentData(String bank, String agency, String account, String paymentMethod, PaymentSchedule paymentSchedule){
         this.bank = bank;
         this.agency = agency;
@@ -28,49 +24,24 @@ public class PaymentData implements Serializable{
         return account;
     }
 
-    public void setAccount(String account){
-        this.account = account;
-    }
-
     public String getAgency(){
         return agency;
-    }
-
-    public void setAgency(String agency){
-        this.agency = agency;
     }
 
     public String getBank(){
         return bank;
     }
 
-    public void setBank(String bank){
-        this.bank = bank;
-    }
-
     public String getPaymentMethod(){
         return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod){
-        this.paymentMethod = paymentMethod;
     }
 
     public PaymentSchedule getPaymentSchedule(){
         return paymentSchedule;
     }
 
-    //tirar duvida com o rodrigo sobre isso
-    public void setPaymentSchedule(PaymentSchedule paymentSchedule){
-        this.paymentSchedule = paymentSchedule;
-    }
-
     public ArrayList<PayCheck> getPayChecks(){
         return payChecks;
-    }
-
-    public void setPayChecks(ArrayList<PayCheck> payChecks){
-        this.payChecks = payChecks;
     }
 
     @Override

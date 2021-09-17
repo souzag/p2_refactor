@@ -8,9 +8,7 @@ public class PaymentSchedule implements Serializable{
     private DayOfWeek weekDay;
     private String schedule;
 
-    public PaymentSchedule(){
-
-    }
+    public PaymentSchedule(){}
 
     public PaymentSchedule(Integer monthDay, DayOfWeek weekDay, String schedule){
         this.monthDay = monthDay;
@@ -20,10 +18,6 @@ public class PaymentSchedule implements Serializable{
 
     public Integer getMonthDay(){
         return monthDay;
-    }
-
-    public void setMonthDay(Integer monthDay){
-        this.monthDay = monthDay;
     }
 
     public String getSchedule(){

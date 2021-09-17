@@ -9,10 +9,6 @@ public class Syndicate implements Serializable{
     private boolean isAffiliated;
     private Double tax;
 
-    public Syndicate(){
-        //empty Syndicate
-    }
-
     public Syndicate(UUID employeeId, boolean isAffiliated, Double tax){
         this.id = UUID.randomUUID();
         this.employeeId = employeeId;
@@ -24,32 +20,16 @@ public class Syndicate implements Serializable{
         return id;
     }
 
-    public void setId(UUID id){
-        this.id = id;
-    }
-
     public Double getTax(){
         return tax;
-    }
-
-    public void setTax(Double tax){
-        this.tax = tax;
     }
 
     public UUID getEmployeeId(){
         return employeeId;
     }
 
-    public void setEmployeeId(UUID employeeId){
-        this.employeeId = employeeId;
-    }
-
     public boolean getIsAffiliated(){
         return this.isAffiliated;
-    }
-
-    public void setAffiliated(boolean isAffiliated){
-        this.isAffiliated = isAffiliated;
     }
 
     @Override

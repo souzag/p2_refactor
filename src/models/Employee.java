@@ -21,8 +21,6 @@ public abstract class Employee implements Serializable{
     private ArrayList<ServiceTax> serviceTax;
     private Syndicate employeeSyndicate;
 
-    public Employee(){}
-
     public Employee(String name, String address, Double salary, PaymentData paymentData){
         this.id = UUID.randomUUID();
         this.name = name;
