@@ -3,10 +3,11 @@ package utils;
 import java.time.DateTimeException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Stack;
 
 import controllers.EmployeeController;
 import controllers.PaymentController;
+import memento.CaretakerCompany;
+
 import models.Company;
 
 public class Menu{
@@ -14,8 +15,7 @@ public class Menu{
         int option = 13;
 
         Scanner input = new Scanner(System.in);
-        Stack<String> undo = new Stack<>();
-        Stack<String> redo = new Stack<>();
+        CaretakerCompany caretaker = new CaretakerCompany(company);
 
         try{
             while(option != 0){
@@ -44,40 +44,40 @@ public class Menu{
                         System.out.println("System is now closed.");
                         break;
                     case 1:
-                        undo.push(GeneralUtils.saveState(company));
+                        caretaker.save();
                         EmployeeController.registerNewEmployee(input, company.getEmployees());
                         break;
                     case 2:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
-                            EmployeeController.listEmployees(company.getEmployees());
+                            caretaker.save();
+                            EmployeeController.listEmployees(company.getEmployees());    
                             EmployeeController.removeEmployee(input, company.getEmployees());
                         }
                         break;
                     case 3:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeUtils.listHourly(company.getEmployees());
-                            EmployeeController.launchTimeCard(input, company.getEmployees());
+                            PaymentController.launchTimeCard(input, company.getEmployees());
                         }
                         break;
                     case 4:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeUtils.listComissioned(company.getEmployees());
-                            EmployeeController.launchSaleResult(input, company.getEmployees());
+                            PaymentController.launchSaleResult(input, company.getEmployees());
                         }
                         break;
                     case 5:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeController.listEmployees(company.getEmployees());
-                            EmployeeController.launchServiceTax(input, company.getEmployees());
+                            PaymentController.launchServiceTax(input, company.getEmployees());
                         }
                         break;
                     case 6:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeController.listEmployees(company.getEmployees());
                             EmployeeController.updateEmployee(input, company.getEmployees());
                         }
@@ -87,7 +87,7 @@ public class Menu{
                         break;
                     case 8:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeController.listEmployees(company.getEmployees());
                             PaymentController.LaunchPayroll(input, company);
                         }
@@ -102,37 +102,23 @@ public class Menu{
                         break;
                     case 10:
                         if(!EmployeeUtils.warningEmptyEmployeesList(company.getEmployees())){
-                            undo.push(GeneralUtils.saveState(company));
+                            caretaker.save();
                             EmployeeController.listEmployees(company.getEmployees());
                             EmployeeController.editEmployeeSchedule(input, company.getEmployees());
                         }
                         break;
                     case 11:
-                        undo.push(GeneralUtils.saveState(company));
+                        caretaker.save();
                         company.getPaymentSchedules().add(EmployeeUtils.createPaymentSchedule(input));
                         break;
                     case 12:
                         System.out.println(company.getPaymentSchedules());
                         break;
                     case 13:
-                        if(!undo.isEmpty()){
-                            redo.push(GeneralUtils.saveState(company));
-                            String state = undo.pop();
-                            company = GeneralUtils.restoreState(state);
-                        }
-                        else{
-                            System.out.println("\n\n Error: There's nothing to undo. \n\n");
-                        }
+                        company = caretaker.undo();    
                         break;
                     case 14:
-                        if(!redo.isEmpty()){
-                            undo.push(GeneralUtils.saveState(company));
-                            String state = redo.pop();
-                            company = GeneralUtils.restoreState(state);
-                        }
-                        else{
-                            System.out.println("\n\n Error: There's nothing to undo. \n\n");
-                        }
+                        company = caretaker.redo();
                         break;
                     default:
                         System.out.println("\n\n Error: Invalid option. Please, try again. \n\n");

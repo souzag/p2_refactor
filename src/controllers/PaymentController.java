@@ -14,7 +14,6 @@ import models.services.TimeCard;
 import models.services.ServiceTax;
 import models.services.SaleResult;
 import models.services.payment.PayCheck;
-import models.services.payment.PaymentList;
 
 import utils.EmployeeUtils;
 import utils.GeneralUtils;
@@ -27,7 +26,6 @@ public class PaymentController{
 
         String stringDate;
         PayCheck payCheck;
-        PaymentList paymentList = null;
         ArrayList<PayCheck> payCheckList = new ArrayList<PayCheck>();
 
         System.out.print("Enter the first date of the month (YYYY-MM-DD): ");

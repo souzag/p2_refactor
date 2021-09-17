@@ -1,8 +1,9 @@
 package models;
 
 import java.util.ArrayList;
-import java.io.Serializable; // undo;redo
+import java.io.Serializable;
 
+import memento.MementoCompany;
 import models.services.payment.PaymentList;
 import models.services.payment.PaymentSchedule;
 
@@ -16,12 +17,6 @@ public class Company implements Serializable{
         this.paymentLists = new ArrayList<PaymentList>();
         this.paymentSchedules = new ArrayList<PaymentSchedule>();
     }
-
-    /*
-     *   useful functions:
-     *   get - gets the specified item.
-     *   set - modifies/replace the specified item.
-     */
 
     public ArrayList<Employee> getEmployees(){
         return employees;
@@ -45,5 +40,9 @@ public class Company implements Serializable{
 
     public void setPaymentSchedules(ArrayList<PaymentSchedule> paymentSchedules){
         this.paymentSchedules = paymentSchedules;
+    }
+
+    public MementoCompany saveState(){
+        return new MementoCompany(this);
     }
 }
