@@ -27,7 +27,6 @@ public abstract class Employee implements Serializable{
         this.address = address;
         this.salary = salary;
         this.paymentData = paymentData;
-        this.employeeSyndicate = null;
         this.serviceTax = new ArrayList<ServiceTax>();
     }
 

@@ -27,11 +27,11 @@ public class PaymentList implements Serializable{
     }
 
     private String listPayChecks(){
-        String str = "";
+        String data = "";
         for(PayCheck paycheck : this.getPayChecks()){
-            str += paycheck.toString();
+            data += paycheck.toString();
         }
 
-        return str;
+        return data;
     }
 }

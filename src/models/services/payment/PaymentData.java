@@ -2,6 +2,9 @@ package models.services.payment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.time.LocalDate;
+
+import models.Employee;
 
 public class PaymentData implements Serializable{
     private String bank;
@@ -54,5 +57,13 @@ public class PaymentData implements Serializable{
         data += "\n\t}";
 
         return data;
+    }
+
+    public boolean verifyPayDate(Employee employee, int week, LocalDate current){
+        boolean dateInSchedule = false;
+        PaymentSchedule employeeSchedule = employee.getPaymentData().getPaymentSchedule();
+        dateInSchedule = employee.getPaymentData().getPaymentSchedule().getStrategy().getDateInSchedule(employeeSchedule, week, current);
+
+        return dateInSchedule;
     }
 }
